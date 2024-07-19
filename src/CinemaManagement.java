@@ -5,6 +5,7 @@ public class CinemaManagement {
     static int[][] seats = new int[3][16];
 
     static Scanner scanner = new Scanner(System.in);
+    static Ticket[] tickets = new Ticket[48];
 
     public static void main (String args[]){
 
@@ -66,17 +67,18 @@ public class CinemaManagement {
     public static void availableSeats (){
         for (int i = 0; i < seats.length; i++){
             for (int j = 0; j < seats[i].length; j++){
-                if (j == 8){
-
-                }
-                else {
-                    seats[i][j] = 0;
-                }
+                seats[i][j] = 0;
             }
         }
     }
 
     public static void buy_tickets (){
+        System.out.print("Enter first name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter surname: ");
+        String surname = scanner.nextLine();
+        System.out.print("Enter email: ");
+        String email = scanner.nextLine();
         System.out.print("Enter row number: ");
         int rowNumber = scanner.nextInt();
         scanner.nextLine();
