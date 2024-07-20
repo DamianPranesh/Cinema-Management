@@ -6,6 +6,7 @@ public class CinemaManagement {
 
     static Scanner scanner = new Scanner(System.in);
     static Ticket[] tickets = new Ticket[48];
+    static int ticketCounter = 0;
 
     public static void main (String args[]){
 
@@ -91,6 +92,34 @@ public class CinemaManagement {
             if (seats[rowNumber - 1][seatNumber - 1] == 0){
                 System.out.println("The seat has been booked. For row number " + rowNumber + ", Seat Number "+ seatNumber);
                 seats[rowNumber - 1][seatNumber - 1] = 1;
+
+                double price;
+
+                switch (rowNumber){
+                    case 1:
+                        price = 12.0;
+                        break;
+
+                    case 2:
+                        price = 10.0;
+                        break;
+
+                    case 3:
+                        price = 8.0;
+                        break;
+
+                    default:
+                        price = 0.0;
+                        break;
+                }
+
+                //Creating Objects
+                Person person = new Person(name, surname, email);
+                Ticket ticket = new Ticket(rowNumber, seatNumber, price, person);
+
+                tickets[ticketCounter] = ticket;
+                ticketCounter++;
+
             }
             else{
                 System.out.println("But unfortunately, the seat is not available.");
@@ -114,6 +143,20 @@ public class CinemaManagement {
             if (seats[rowNumber - 1][seatNumber - 1] == 1){
                 System.out.println("The seat has been cancelled. For row number " + rowNumber + ", Seat Number "+ seatNumber);
                 seats[rowNumber - 1][seatNumber - 1] = 0;
+
+                // Shift all subsequent tickets one position to the left
+                for (int i = 0; i < tickets.length; i++){
+                    if (tickets[i].getRow() == rowNumber && tickets[i].getSeat() == seatNumber){
+
+                        //Moving every other element to the left
+                        for (int j = i; j < tickets.length - 1; j++){
+                            tickets[j] = tickets[j+1];
+                        }
+                        tickets[ticketCounter - 1] = null;
+                        ticketCounter--;
+                        break;
+                    }
+                }
             }
             else{
                 System.out.println("This seat is already available.");
