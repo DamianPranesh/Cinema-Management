@@ -48,6 +48,6 @@ public class Ticket {
     }
 
     public String printTicketInformation (){
-        return "Ticket [Row: " + row + ", Seat: " + seat + ", Price: " + price + ", Person: " + person + "]";
+        return "Ticket [Row: " + row + ", Seat: " + seat + ", Price: " + price + ", Person: " + person.printInformation() + "]";
     }
 }

@@ -50,17 +50,24 @@ public class CinemaManagement {
                     break;
 
                 case 5:
+                    print_tickets_info();
                     break;
 
                 case 6:
+                    search_ticket();
                     break;
 
                 case 7:
+                    sort_tickets();
                     break;
 
                 case 8:
                     System.out.println("Exiting...");
                     return;
+
+                default:
+                    System.out.println("Invalid integer. Please try again!");
+                    break;
             }
         }
     }
@@ -98,18 +105,22 @@ public class CinemaManagement {
                 switch (rowNumber){
                     case 1:
                         price = 12.0;
+                        System.out.println("The ticket price is £" + price + ".");
                         break;
 
                     case 2:
                         price = 10.0;
+                        System.out.println("The ticket price is £" + price + ".");
                         break;
 
                     case 3:
                         price = 8.0;
+                        System.out.println("The ticket price is £" + price + ".");
                         break;
 
                     default:
                         price = 0.0;
+                        System.out.println("The ticket price is £" + price + ".");
                         break;
                 }
 
@@ -205,6 +216,48 @@ public class CinemaManagement {
                     return;
                 }
             }
+        }
+    }
+
+    public static void print_tickets_info (){
+        double totalPrice = 0;
+        for (int i = 0; i < ticketCounter; i++){
+            System.out.println(tickets[i].printTicketInformation());
+            totalPrice += tickets[i].getPrice();
+        }
+        System.out.println("The total price of all tickets is £" + totalPrice + ".");
+    }
+
+    public static void search_ticket (){
+        System.out.print("Enter row number: ");
+        int rowNumber = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter seat number: ");
+        int seatNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        for (int i = 0; i < ticketCounter; i++){
+            if (tickets[i].getRow() == rowNumber && tickets[i].getSeat() == seatNumber){
+                System.out.println("Ticket found: " + tickets[i].printTicketInformation());
+                return;
+            }
+        }
+        System.out.println("The seat is available.");
+    }
+
+    public static void sort_tickets (){
+        for (int i = 0; i < ticketCounter - 1; i++) {
+            for (int j = 0; j < ticketCounter - i - 1; j++) {
+                if (tickets[j].getPrice() > tickets[j + 1].getPrice()) {
+                    Ticket temp = tickets[j];
+                    tickets[j] = tickets[j + 1];
+                    tickets[j + 1] = temp;
+                }
+            }
+        }
+        System.out.println("Tickets sorted by price.");
+        for (int i = 0; i < ticketCounter; i++) {
+            System.out.println(tickets[i].printTicketInformation());
         }
     }
 }

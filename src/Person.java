@@ -38,6 +38,6 @@ public class Person {
     }
 
     public String printInformation (){
-        return "Person [Name: " + name + ", Surname: " + surname + ", Email: " + email + "]";
+        return "[Name: " + name + ", Surname: " + surname + ", Email: " + email + "]";
     }
 }
